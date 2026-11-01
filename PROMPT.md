@@ -83,6 +83,9 @@ La IA me devolvió el procedimiento (`Copy-Item .env.example .env` y pegar `gsk_
    las peticiones se hacen con el `fetch` nativo.
 4. **Ajusté el manejo del `id` para que no incluyera la fecha**, de forma que los mismos datos
    den siempre el mismo `id` y los archivos se puedan reutilizar (ahorro de cuota).
+5. **Cambié el servicio de imagen a Pollinations.** El endpoint de NVIDIA FLUX.1-schnell dejó
+   de responder (timeout y error 422), así que elegí Pollinations (sin clave y con respuesta en
+   bytes). El módulo `imagen.js` decide el modo según `IMAGEN_URL`.
 
 ## F. Una línea de código que no entendía al principio
 

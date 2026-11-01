@@ -32,16 +32,23 @@ Este taller integra lo visto en las sesiones 0 a 5 (Node.js del SENA).
 | Paso | Servicio | Modelo | Enlace |
 | --- | --- | --- | --- |
 | Texto | Groq | `openai/gpt-oss-20b` | https://console.groq.com/keys |
-| Imagen | NVIDIA | `black-forest-labs/flux.1-schnell` | https://build.nvidia.com/black-forest-labs/flux-1-schnell |
+| Imagen | Pollinations | FLUX (sin clave) | https://pollinations.ai |
 
 - Groq: plan gratuito con 30 peticiones por minuto y 1.000 por día.
-- NVIDIA: créditos gratuitos limitados; cada imagen gasta créditos.
+- Pollinations: servicio gratuito **sin clave** que devuelve los bytes de la imagen
+  directamente; su plan gratuito permite **1 imagen cada ~45 s** (si se pide otra antes,
+  responde 402 y el programa lo avisa).
+
+> Se empezó con **NVIDIA FLUX.1-schnell**, pero su endpoint de imágenes dejó de responder
+> (timeout / error 422 según el modelo). Por eso el módulo `imagen.js` detecta el servicio
+> desde `IMAGEN_URL`: si la URL es de Pollinations usa una petición **GET sin clave**
+> (los bytes llegan con `arrayBuffer`), y si no, usa el modo **POST con clave y base64**.
 
 ## Requisitos
 
 - **Node.js 20.12 o superior** (el programa usa `process.loadEnvFile`). Comprueba con `node -v`.
 - `npm` y `git`.
-- Una cuenta gratuita en Groq y en NVIDIA (o el servicio que elijas).
+- Una cuenta gratuita en Groq. El servicio de imagen (Pollinations) **no** necesita cuenta.
 
 ## Configuración
 
@@ -57,8 +64,8 @@ Este taller integra lo visto en las sesiones 0 a 5 (Node.js del SENA).
    TEXTO_API_KEY=gsk_...tu_clave_de_groq
    TEXTO_URL=https://api.groq.com/openai/v1/chat/completions
    TEXTO_MODELO=openai/gpt-oss-20b
-   IMAGEN_API_KEY=nvapi-...tu_clave_de_nvidia
-   IMAGEN_URL=https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-schnell
+   IMAGEN_API_KEY=
+   IMAGEN_URL=https://image.pollinations.ai/prompt
    ```
 
 3. Instala las dependencias:
@@ -72,7 +79,7 @@ Este taller integra lo visto en las sesiones 0 a 5 (Node.js del SENA).
 | `TEXTO_API_KEY` | Clave del servicio de texto (Groq). |
 | `TEXTO_URL` | URL del endpoint de texto. |
 | `TEXTO_MODELO` | Nombre del modelo de texto. |
-| `IMAGEN_API_KEY` | Clave del servicio de imágenes (NVIDIA). |
+| `IMAGEN_API_KEY` | Clave del servicio de imágenes. Se deja **vacía** con Pollinations (no la necesita); se usa si cambias a otro servicio como NVIDIA. |
 | `IMAGEN_URL` | URL del endpoint de imágenes. |
 
 ## Ejemplo de uso
