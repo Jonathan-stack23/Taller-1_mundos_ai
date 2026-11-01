@@ -1,0 +1,23 @@
+{
+  "name": "mundos-ia",
+  "version": "1.0.0",
+  "description": "Programa de consola que crea mundos imaginarios: valida los parametros, guarda un JSON, pide la descripcion a un modelo de texto y genera la imagen con un modelo de imagenes.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mundos",
+    "ia",
+    "nodejs",
+    "sena",
+    "generador",
+    "imagenes"
+  ],
+  "author": "Jonathan Martinez",
+  "license": "MIT",
+  "dependencies": {
+    "object-hash": "^3.0.0"
+  }
+}
